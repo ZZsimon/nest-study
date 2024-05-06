@@ -1,0 +1,21 @@
+const Koa = require('koa')
+const app = new Koa()
+
+app.use(async (ctx, next) => {
+    if (ctx.path === '/classic/latest' && ctx.method === 'GET') {
+
+        // Content-Type: application/json; charset=utf-8
+        // Koa自动帮我们判断出应该返回什么类型的Content-Type
+        ctx.body = {
+            key: 'classic 222'
+        }
+
+        // Content-Type: text/plain; charset=utf-8
+        // ctx.body = 'classic 222' 
+    }
+
+    // 不可能在这个中间件里对所有的path做判断，因此我们需要提取出来单独对所有的path做处理
+    // 而这件事情，已经有人帮我们做了，使用koa-router这个库就可以
+})
+
+app.listen(4000)

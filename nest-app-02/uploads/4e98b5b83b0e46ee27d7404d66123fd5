@@ -1,0 +1,23 @@
+const Koa = require('koa')
+var Router = require('koa-router');
+
+const app = new Koa()
+const router = new Router();
+
+router.get('/classic/latest', async (ctx, next) => {
+    ctx.body = {
+        key: 'latest'
+    }
+});
+router.get('/', async (ctx, next) => {
+    ctx.body = {
+        key: 'home'
+    }
+});
+
+// 所有的路由都写在这里，显然不好维护
+// 因此需要进行路由拆分
+
+app.use(router.routes()).use(router.allowedMethods());
+
+app.listen(4000)

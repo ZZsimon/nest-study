@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/qs@6.10.2/dist/qs.js"></script>
+</head>
+
+<body>
+    <input id="fileInput" type="file" multiple />
+
+    <script>
+        async function urlParam() {
+            const res = await axios.get('/api/person/1');
+            console.log(res);
+        }
+        // urlParam();
+
+        async function query() {
+            const res = await axios.get('/api/person/find', {
+                params: {
+                    name: '邵',
+                    age: 20
+                }
+            });
+            console.log(res);
+        }
+        // query();
+
+        async function urlEncoded() {
+            const res = await axios.post('/api/person', Qs.stringify({
+                name: '邵',
+                age: 20
+            }), {
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                }
+            });
+            console.log(res);
+        }
+        // urlEncoded();
+
+
+        // 默认post请求就会使用content-type=json
+        async function jsonData() {
+            const res = await axios.post('/api/person', {
+                name: '邵2',
+                age: 22
+            });
+            console.log(res);
+        }
+        // jsonData();
+
+        const Input = document.querySelector('#fileInput');
+        async function formData() {
+            const data = new FormData();
+            data.set('name', '邵');
+            data.set('age', 23);
+
+            data.set('file1', Input.files[0]);
+            data.set('file2', Input.files[1]);
+
+            const res = await axios.post('/api/person/file', data, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            })
+
+            console.log(res, 'res');
+
+        }
+
+
+        Input.onchange = formData;
+
+    </script>
+</body>
