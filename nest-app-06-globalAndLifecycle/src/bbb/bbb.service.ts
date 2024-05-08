@@ -5,7 +5,6 @@ import { AaaService } from 'src/aaa/aaa.service';
 
 @Injectable()
 export class BbbService {
-
   // 在nest中，Service既可以被注入也可以注入到其他类中
   @Inject()
   private readonly aaaService: AaaService;

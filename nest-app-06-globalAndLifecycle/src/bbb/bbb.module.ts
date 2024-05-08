@@ -7,4 +7,4 @@ import { BbbController } from './bbb.controller';
   controllers: [BbbController],
   providers: [BbbService],
 })
-export class BbbModule { }
+export class BbbModule {}

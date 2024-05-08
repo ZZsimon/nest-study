@@ -14,7 +14,7 @@ import { UpdateBbbDto } from './dto/update-bbb.dto';
 
 @Controller('bbb')
 export class BbbController {
-  constructor(private readonly bbbService: BbbService) { }
+  constructor(private readonly bbbService: BbbService) {}
 
   @Post()
   create(@Body() createBbbDto: CreateBbbDto) {
