@@ -10,17 +10,18 @@
 </head>
 
 <body>
-    <input id="fileInput" type="file" />
+    <input id="fileInput" type="file" multiple />
     <script>
         const fileInput = document.querySelector('#fileInput');
 
         async function formData() {
             const data = new FormData();
-            data.set('name', '光');
-            data.set('age', 20);
-            data.set('file', fileInput.files[0]);
-
-            const res = await axios.post('http://localhost:3333/aaa', data);
+            data.set('name', '邵');
+            data.set('age', 12);
+            [...fileInput.files].forEach((file) => {
+                data.append('files', file)
+            })
+            const res = await axios.post('http://localhost:3333/bbb', data);
             console.log(res);
         }
 
