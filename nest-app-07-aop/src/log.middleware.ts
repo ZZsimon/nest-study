@@ -4,9 +4,9 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 @Injectable()
 export class LogMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
-    console.log(req.url, ' before LogMiddleware')
+    console.log(req.url, ' before LogMiddleware');
 
     next();
-    console.log(req.url, ' after LogMiddleware')
+    console.log(req.url, ' after LogMiddleware');
   }
 }

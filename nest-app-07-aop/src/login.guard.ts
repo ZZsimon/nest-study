@@ -1,4 +1,9 @@
-import { CanActivate, ExecutionContext, Inject, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { AppService } from './app.service';
 
@@ -6,10 +11,8 @@ import { AppService } from './app.service';
 // 当这个LoginGuard被注入到ioc容器的时候，它也可以把别的Provider注入到自己的类中
 @Injectable()
 export class LoginGuard implements CanActivate {
-
   @Inject(AppService)
-  private appService: AppService
-
+  private appService: AppService;
 
   canActivate(
     context: ExecutionContext,
@@ -17,6 +20,7 @@ export class LoginGuard implements CanActivate {
     console.log('login check');
     console.log('login check', this.appService.getHello());
 
+    // 该函数返回false的话，无法执行相应Controller的handler函数
     return false;
   }
 }
