@@ -7,10 +7,10 @@ import { join } from 'path';
 
 @Module({
   imports: [PersonModule,
-   ServeStaticModule.forRoot({
+    ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

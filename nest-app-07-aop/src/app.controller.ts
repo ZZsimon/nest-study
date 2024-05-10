@@ -9,7 +9,7 @@ import { TestFilterFilter } from './test-filter.filter';
 @Controller()
 // @UseInterceptors(TimeInterceptor)
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
@@ -27,7 +27,6 @@ export class AppController {
     console.log('aaa hanlder');
     return 'aaa';
   }
-
 
   @Get('bbb')
   // @UseGuards(LoginGuard)

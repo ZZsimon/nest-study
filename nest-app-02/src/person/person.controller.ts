@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete,Query,UseInterceptors,UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
 
 import { PersonService } from './person.service';
@@ -8,13 +8,13 @@ import { UpdatePersonDto } from './dto/update-person.dto';
 
 @Controller('api/person')
 export class PersonController {
-  constructor(private readonly personService: PersonService) {}
+  constructor(private readonly personService: PersonService) { }
 
   @Post('file')
   @UseInterceptors(AnyFilesInterceptor({
-      dest: 'uploads/'
+    dest: 'uploads/'
   }))
-  upload(@Body() createPersonDto: CreatePersonDto,@UploadedFiles() files: Array<Express.Multer.File>) {
+  upload(@Body() createPersonDto: CreatePersonDto, @UploadedFiles() files: Array<Express.Multer.File>) {
     return this.personService.create(createPersonDto);
   }
 
