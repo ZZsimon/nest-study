@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <input id="fileInput" type="file" />
+    <script>
+        const fileInput = document.querySelector('#fileInput');
+        const chunkSize = 6026 * 1024*5;
+
+
+        async function formData() {
+            const file=fileInput.files[0];
+            console.log(file,'file');
+
+            const chunks = [];
+            let startPos = 0;
+            while(startPos < file.size) {
+                chunks.push(file.slice(startPos, startPos + chunkSize));
+                startPos += chunkSize;
+            }
+
+            console.log(chunks,'chunks');
+
+            chunks.map((chunk, index) => {
+                const data = new FormData();
+                data.set('name', file.name + '-' + index)
+                data.append('files', chunk);
+                axios.post('http://localhost:3000/upload', data);
+            })
+
+
+            // const data = new FormData();
+            // data.set('name', '邵');
+            // data.set('age', 12);
+            // data.set('files', file);
+            // const res = await axios.post('http://localhost:3000/upload', data);
+            // console.log(res);
+        }
+
+        fileInput.onchange = formData;
+    </script>
+</body>
+
+</html>
