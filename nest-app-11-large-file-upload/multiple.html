@@ -13,7 +13,7 @@
     <input id="fileInput" type="file" />
     <script>
         const fileInput = document.querySelector('#fileInput');
-        const chunkSize = 6026 * 1024*5;
+        const chunkSize = 16000 * 1024;
 
 
         async function formData() {
@@ -27,22 +27,16 @@
                 startPos += chunkSize;
             }
 
-            console.log(chunks,'chunks');
+            const randomNumber=Math.random().toString().slice(2, 12);
+
+
 
             chunks.map((chunk, index) => {
                 const data = new FormData();
-                data.set('name', file.name + '-' + index)
+                data.set('name', file.name+'-'+randomNumber + '_' + index)
                 data.append('files', chunk);
                 axios.post('http://localhost:3000/upload', data);
             })
-
-
-            // const data = new FormData();
-            // data.set('name', '邵');
-            // data.set('age', 12);
-            // data.set('files', file);
-            // const res = await axios.post('http://localhost:3000/upload', data);
-            // console.log(res);
         }
 
         fileInput.onchange = formData;
